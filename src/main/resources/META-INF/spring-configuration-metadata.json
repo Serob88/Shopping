@@ -1,0 +1,92 @@
+{
+  "properties": [
+    {
+      "name": "datasource.url",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "datasource.username",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "datasource.password",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "datasource.driver-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "datasource.hikari.schema",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "liquibase.change-log",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "liquibase.default-schema",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "swagger.title",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "swagger.description",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "swagger.contact.name",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "swagger.contact.url",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "swagger.contact.email",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.filter.ignoredUrlPatterns",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.filter.publicGetUrlPatterns",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.header",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.authorizationPrefix",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.signatureAlgorithm",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.publicKeyPath",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.privateKeyPath",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.refreshToken.webValidity",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.accessToken.issuer",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.accessToken.subject",
+      "type": "java.lang.String"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+databaseChangeLog:
+- includeAll:
+    path: classpath:/db/changelog/initial
+- include:
+      file: classpath:/db/changelog/sql/add_admin_user.sql

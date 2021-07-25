@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+    hikari:
+      schema: shopping_application
+      connection-timeout: 5000
+      maximum-pool-size: 10
+
+  liquibase:
+    change-log: classpath:/db/changelog/master.yml
+    enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+authorization:
+  security:
+    filter:
+      ignoredUrlPatterns:
+      - "/api/auth/**"
+      - "/api/signup/**"
+      - "/v2/api-docs"
+      - "/swagger-resources/configuration/ui"
+      - "/swagger-resources"
+      - "/swagger-resources/configuration/pojo"
+      - "/swagger-ui.html"
+      - "/webjars/**"
+      - "/sw.js"
+      - "/swagger-resources/configuration/security"
+      publicGetUrlPatterns:
+      - "/api/test/**"
+
+    jwt:
+      header: "Authorization"
+      authorizationPrefix: "Bearer"
+      signatureKey: "32890099755186970999"
+      signatureAlgorithm: HS256
+      refreshToken:
+        validity: 30 # days
+      accessToken:
+        issuer: "Shopping API"
+        subject: "Shopping API Access"
+        validity: 30 # minutes
+
+swagger:
+  title: "Shopping Application"
+  description: "Shopping Application"
+  contact:
+    name: "Serob Kirakosyan"
+    url: "https://shopping.am"
+    email: "serob.kiraksyan.88@gmail.com"

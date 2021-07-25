@@ -1,0 +1,3 @@
+INSERT INTO shopping_application.sp_role (type, created_date) VALUES ('ADMIN', '2021-07-25 12:45:10.000000');
+INSERT INTO shopping_application.sp_user (name, email, birthday, password, is_blocked, created_date) VALUES ('Admin', 'admin@shopping.com', '1988-01-09', 'e10adc3949ba59abbe56e057f20f883e', false, '2021-07-25 12:47:17.000000');
+INSERT INTO shopping_application.sp_users_roles (user_id, role_id)  VALUES (1,1);

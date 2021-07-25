@@ -1,0 +1,99 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+  <changeSet id="AuthDomainInitialTables" author="Serob Kirakosyan">
+    <createTable id="Add user table" tableName="sp_user">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="pkey_user"/>
+      </column>
+      <column name="name" type="VARCHAR(128)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="email" type="VARCHAR(256)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="birthday" type="date"/>
+      <column name="password" type="VARCHAR(128)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="is_blocked" type="BOOLEAN"/>
+      <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <createTable id="Add role table" tableName="sp_role">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="pkey_role"/>
+      </column>
+      <column name="type" type="VARCHAR(10)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <createTable id="Add user role table" tableName="sp_users_roles">
+      <column name="user_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="role_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <addPrimaryKey
+      columnNames="user_id, role_id"
+      constraintName="pkey_sp_users_roles"
+      tableName="sp_users_roles"/>
+
+    <createTable tableName="sp_refresh_token">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="pkey_refresh_token"/>
+      </column>
+      <column name="user_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="token" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="active" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="expiration_date" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="Serob Kirakosyan" id="Role id as foreign key">
+    <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="sp_users_roles"
+      constraintName="fkey_users_roles_role_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+      onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="sp_role" validate="true"/>
+  </changeSet>
+
+  <changeSet author="Serob Kirakosyan" id="User id as foreign key">
+    <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sp_users_roles"
+      constraintName="fkey_users_roles_user_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE"
+      onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="sp_user" validate="true"/>
+  </changeSet>
+
+  <changeSet author="Serob Kirakosyan" id="Index for role id">
+    <createIndex indexName="index_users_roles_role_id" tableName="sp_users_roles">
+      <column name="role_id"/>
+    </createIndex>
+  </changeSet>
+
+  <changeSet author="Serob Kirakosyan" id="index for user id">
+    <createIndex indexName="index_users_roles_user_id" tableName="sp_users_roles">
+      <column name="user_id"/>
+    </createIndex>
+  </changeSet>
+
+</databaseChangeLog>
