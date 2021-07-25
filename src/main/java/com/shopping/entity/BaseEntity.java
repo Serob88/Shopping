@@ -17,10 +17,10 @@ public abstract class BaseEntity implements Serializable {
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  protected Long id;
 
   @Column(name = "created_date")
-  private LocalDateTime createdDate;
+  protected LocalDateTime createdDate;
 
   @PrePersist
   public void prePersist() {

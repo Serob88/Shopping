@@ -1,6 +1,6 @@
 package com.shopping.service;
 
-import com.shopping.dto.CommentRequestDto;
+import com.shopping.dto.product.CommentRequestDto;
 
 public interface ReviewService {
 

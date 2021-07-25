@@ -1,6 +1,6 @@
 package com.shopping.api;
 
-import com.shopping.dto.CommentRequestDto;
+import com.shopping.dto.product.CommentRequestDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

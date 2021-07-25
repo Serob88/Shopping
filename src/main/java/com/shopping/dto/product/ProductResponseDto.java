@@ -1,6 +1,5 @@
 package com.shopping.dto.product;
 
-import com.shopping.entity.Review;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
@@ -23,5 +22,5 @@ public class ProductResponseDto {
   private String category;
 
   @ApiModelProperty(value = "Product reviews")
-  private List<Review> reviews;
+  private List<ReviewResponseDto> reviews;
 }

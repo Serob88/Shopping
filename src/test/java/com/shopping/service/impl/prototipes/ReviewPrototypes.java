@@ -1,6 +1,6 @@
 package com.shopping.service.impl.prototipes;
 
-import com.shopping.dto.CommentRequestDto;
+import com.shopping.dto.product.CommentRequestDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -20,7 +20,7 @@ public class Review extends BaseEntity {
   @Column(name = "user_id", nullable = false)
   private Long userId;
 
-  @JoinColumn(name = "product_id", nullable = false)
+  @Column(name = "product_id", nullable = false)
   private Long productId;
 
   @Column(name = "comment")

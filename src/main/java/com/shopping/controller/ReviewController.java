@@ -1,11 +1,10 @@
 package com.shopping.controller;
 
 import com.shopping.api.ReviewApi;
-import com.shopping.dto.CommentRequestDto;
+import com.shopping.dto.product.CommentRequestDto;
 import com.shopping.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

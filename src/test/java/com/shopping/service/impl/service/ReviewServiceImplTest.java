@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.shopping.dto.CommentRequestDto;
+import com.shopping.dto.product.CommentRequestDto;
 import com.shopping.entity.Product;
 import com.shopping.entity.Review;
 import com.shopping.entity.User;

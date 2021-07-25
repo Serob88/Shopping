@@ -1,8 +1,6 @@
 package com.shopping.entity;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +26,7 @@ public class Product extends BaseEntity {
   @Column(name = "category")
   private String category;
 
-  @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "product")
+  @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "productId")
   private List<Review> reviews;
 
 }
