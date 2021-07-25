@@ -1,7 +1,6 @@
 package com.shopping.repository;
 
 import com.shopping.entity.Product;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +19,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
       + "WHERE r.rate = :rate")
   Page<Product> findByRate(int rate, Pageable pageable);
 
+//  @Query("FROM Product p "
+//      + "WHERE p.price >= :minPrice "
+//      + "and p.price <= : maxPrice")
+  Page<Product> findAllByPriceBetween(Double minPrice, Double maxPrice, Pageable pageable);
 }

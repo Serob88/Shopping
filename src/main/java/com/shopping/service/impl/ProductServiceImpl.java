@@ -7,6 +7,7 @@ import com.shopping.exception.error.ErrorCode;
 import com.shopping.exception.ProductException;
 import com.shopping.repository.ProductRepository;
 import com.shopping.service.ProductService;
+import com.shopping.service.ReviewService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +23,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductServiceImpl implements ProductService {
 
   private final ProductRepository productRepository;
+  private final ReviewService reviewService;
   private final MapperFacade mapper;
 
   @Override
   @Transactional
-  public ProductResponseDto creat(ProductRequestDto request) {
+  public ProductResponseDto creat(final ProductRequestDto request) {
     log.info("Trying to save product: {}", request);
 
     Product product = mapper.map(request, Product.class);
@@ -42,7 +44,9 @@ public class ProductServiceImpl implements ProductService {
     Product product = productRepository.findById(id)
         .orElseThrow(() -> new ProductException(ErrorCode.PRODUCT_NOT_FOUND));
 
-    return mapper.map(product, ProductResponseDto.class);
+    ProductResponseDto responseDto = mapper.map(product, ProductResponseDto.class);
+    responseDto.setRate(reviewService.findProductRate(id));
+    return responseDto;
   }
 
   @Override
@@ -57,6 +61,14 @@ public class ProductServiceImpl implements ProductService {
   @Transactional
   public List<ProductResponseDto> findByRate(int rate, Pageable pageable) {
     Page<Product> products = productRepository.findByRate(rate, pageable);
+
+    return mapper.mapAsList(products, ProductResponseDto.class);
+  }
+
+  @Override
+  @Transactional
+  public List<ProductResponseDto> findByPriceRange(Double minPrice, Double maxPrice, Pageable pageable) {
+    Page<Product> products = productRepository.findAllByPriceBetween(minPrice, maxPrice, pageable);
 
     return mapper.mapAsList(products, ProductResponseDto.class);
   }

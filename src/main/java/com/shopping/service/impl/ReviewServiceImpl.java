@@ -1,18 +1,20 @@
 package com.shopping.service.impl;
 
-import com.shopping.dto.product.CommentRequestDto;
+import com.shopping.dto.product.ReviewRequestDto;
+import com.shopping.dto.product.ReviewResponseDto;
 import com.shopping.entity.Product;
 import com.shopping.entity.Review;
 import com.shopping.entity.User;
-import com.shopping.exception.error.ErrorCode;
 import com.shopping.exception.ProductException;
 import com.shopping.exception.UserException;
+import com.shopping.exception.error.ErrorCode;
 import com.shopping.repository.ProductRepository;
 import com.shopping.repository.ReviewRepository;
 import com.shopping.security.AuthorizationFacade;
 import com.shopping.service.ReviewService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,38 +26,33 @@ public class ReviewServiceImpl implements ReviewService {
   private final ReviewRepository reviewRepository;
   private final ProductRepository productRepository;
 
+  private final MapperFacade mapper;
+
   private final AuthorizationFacade authorizationFacade;
 
   @Override
   @Transactional
-  public void comment(Long productId, CommentRequestDto request) {
+  public ReviewResponseDto review(Long productId, ReviewRequestDto request) {
     User user = currentUser();
 
     Product product = findProduct(productId);
 
     Review review = new Review();
     review.setUserId(user.getId());
-    review.setComment(request.getText());
+    review.setComment(request.getComment());
     review.setProductId(product.getId());
+    review.setRate(request.getRate());
 
     log.info("trying to saved review: {}", review);
     reviewRepository.save(review);
+
+    return mapper.map(review, ReviewResponseDto.class);
   }
 
   @Override
   @Transactional
-  public void rate(Long productId, int rate) {
-    User user = currentUser();
-
-    Product product = findProduct(productId);
-
-    Review review = new Review();
-    review.setUserId(user.getId());
-    review.setRate(rate);
-    review.setProductId(product.getId());
-
-    log.info("trying to saved review: {}", review);
-    reviewRepository.save(review);
+  public Double findProductRate(final Long productId) {
+    return reviewRepository.findProductRate(productId);
   }
 
   private User currentUser() {

@@ -87,6 +87,18 @@
     {
       "name": "authorization.security.jwt.accessToken.subject",
       "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.signatureKey",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.refreshToken.validity",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "authorization.security.jwt.accessToken.validity",
+      "type": "java.lang.String"
     }
   ]
 }

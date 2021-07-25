@@ -14,6 +14,7 @@ import com.shopping.entity.Product;
 import com.shopping.exception.error.ErrorCode;
 import com.shopping.exception.ProductException;
 import com.shopping.repository.ProductRepository;
+import com.shopping.service.ReviewService;
 import com.shopping.service.impl.ProductServiceImpl;
 import java.util.Optional;
 import ma.glasnost.orika.MapperFacade;
@@ -29,6 +30,9 @@ public class ProductServiceImplTest {
 
   @Mock
   private ProductRepository productRepository;
+
+  @Mock
+  private ReviewService reviewService;
 
   @Spy
   private MapperFacade mapper = new BeansConfig().mapper();
@@ -78,6 +82,7 @@ public class ProductServiceImplTest {
     final Product product = buildProduct("Product", "clothes");
 
     when(productRepository.findById(id)).thenReturn(Optional.of(product));
+    when(reviewService.findProductRate(id)).thenReturn(3.3);
 
     //WHEN
     final ProductResponseDto response = productService.findById(id);

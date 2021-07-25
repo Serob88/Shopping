@@ -9,15 +9,18 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -30,7 +33,7 @@ public class ProductController implements ProductApi {
 
   @Override
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ProductResponseDto> creat(@RequestBody @Valid final ProductRequestDto request) {
 
     log.info("Trying to creat product with credentials: {}", request);
@@ -66,6 +69,17 @@ public class ProductController implements ProductApi {
     log.info("Trying to find products by rate: {}", rate);
 
     return ResponseEntity.ok(productService.findByRate(rate, pageable));
+  }
+
+  @Override
+  @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+  @GetMapping(value = "/minPrice/{minPrice}/maxPrice/{maxPrice}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<ProductResponseDto>> findByPriceRange(@RequestParam(value = "minPrice") Double minPrice,
+      @RequestParam(value = "maxPrice") Double maxPrice, Pageable pageable) {
+
+    log.info("Trying to find products by minPrice: {} maxPrice: {}", minPrice, maxPrice);
+
+    return ResponseEntity.ok(productService.findByPriceRange(minPrice, maxPrice, pageable));
   }
 
   @Override

@@ -1,23 +1,24 @@
 package com.shopping.service;
 
-import com.shopping.dto.product.CommentRequestDto;
+import com.shopping.dto.product.ReviewRequestDto;
+import com.shopping.dto.product.ReviewResponseDto;
 
 public interface ReviewService {
 
   /**
-   * Commented product.
+   * Review product.
    *
    * @param productId Long product id
-   * @param request {@link CommentRequestDto}
+   * @param request {@link ReviewRequestDto}
+   * @return {@link ReviewResponseDto}
    */
-  void comment(Long productId, CommentRequestDto request);
+  ReviewResponseDto review(Long productId, ReviewRequestDto request);
 
   /**
-   * Rate product.
+   * Find product rate avg.
    *
    * @param productId Long product id
-   * @param rate int rate
+   * @return Double product rate avg
    */
-  void rate(Long productId, int rate);
-
+  Double findProductRate(final Long productId);
 }

@@ -8,6 +8,7 @@ import com.shopping.dto.signin.SignInResponseDto;
 import com.shopping.dto.signup.SignUpRequestDto;
 import com.shopping.dto.signup.SignUpResponseDto;
 import com.shopping.service.AuthService;
+import com.shopping.service.RefreshTokenService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController implements AuthApi {
 
   private final AuthService authService;
+  private final RefreshTokenService refreshTokenService;
 
   @Override
   @PostMapping(value = "/signIn")
@@ -44,7 +46,9 @@ public class AuthController implements AuthApi {
   @Override
   @PostMapping(value = "/refreshToken")
   public ResponseEntity<RefreshTokenResponseDto> refreshToken(RefreshTokenRequestDto request) {
-    return null;
+    log.info("Trying to refresh JWT token: {}", request);
+
+    return ResponseEntity.ok(refreshTokenService.refreshToken(request));
   }
 
 }

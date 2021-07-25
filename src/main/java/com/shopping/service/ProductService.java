@@ -40,6 +40,15 @@ public interface ProductService {
   List<ProductResponseDto> findByRate(int rate, Pageable pageable);
 
   /**
+   * Find products by price range.
+   *
+   * @param minPrice int minimum price
+   * @param maxPrice int maximum price
+   * @return list of ProductResponseDto {@link ProductResponseDto}
+   */
+  List<ProductResponseDto> findByPriceRange(Double minPrice, Double maxPrice, Pageable pageable);
+
+  /**
    * Find all products.
    *
    * @return list of ProductResponseDto {@link ProductResponseDto}

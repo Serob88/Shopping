@@ -34,6 +34,13 @@ public interface AuthApi {
   })
   ResponseEntity<SignUpResponseDto> signUp(@ApiParam("Sign up request") SignUpRequestDto request);
 
+  @ApiOperation(value = "refresh JWT token")
+  @ApiResponses({
+      @ApiResponse(code = 200, message = "RefreshToken up success"),
+      @ApiResponse(code = 400, message = "Missing or erroneous parameter"),
+      @ApiResponse(code = 404, message = "Token not found"),
+      @ApiResponse(code = 500, message = "Internal Server Error")
+  })
   ResponseEntity<RefreshTokenResponseDto> refreshToken(@ApiParam("Refresh token") RefreshTokenRequestDto request);
 
 }

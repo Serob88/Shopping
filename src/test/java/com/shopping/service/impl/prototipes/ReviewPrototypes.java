@@ -1,14 +1,15 @@
 package com.shopping.service.impl.prototipes;
 
-import com.shopping.dto.product.CommentRequestDto;
+import com.shopping.dto.product.ReviewRequestDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ReviewPrototypes extends Prototype {
 
-  public static CommentRequestDto buildCommentRequestDto(final String text) {
-    CommentRequestDto requestDto = new CommentRequestDto();
-    requestDto.setText(text);
+  public static ReviewRequestDto buildCommentRequestDto(final String text, final int rate) {
+    ReviewRequestDto requestDto = new ReviewRequestDto();
+    requestDto.setComment(text);
+    requestDto.setRate(rate);
 
     return requestDto;
   }

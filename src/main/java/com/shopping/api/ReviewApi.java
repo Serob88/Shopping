@@ -1,6 +1,7 @@
 package com.shopping.api;
 
-import com.shopping.dto.product.CommentRequestDto;
+import com.shopping.dto.product.ReviewRequestDto;
+import com.shopping.dto.product.ReviewResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,16 +19,7 @@ public interface ReviewApi {
       @ApiResponse(code = 404, message = "product not found"),
       @ApiResponse(code = 500, message = "Internal Server Error")
   })
-  ResponseEntity<Void> comment(@ApiParam(value = "id", required = true) Long productId,
-      @ApiParam(value = "The comment text", required = true) CommentRequestDto request);
+  ResponseEntity<ReviewResponseDto> review(@ApiParam(value = "id", required = true) Long productId,
+      @ApiParam(value = "The comment text", required = true) ReviewRequestDto request);
 
-  @ApiOperation(value = "Comment product by id")
-  @ApiResponses({
-      @ApiResponse(code = 200, message = "OK"),
-      @ApiResponse(code = 403, message = "User blocked"),
-      @ApiResponse(code = 404, message = "product not found"),
-      @ApiResponse(code = 500, message = "Internal Server Error")
-  })
-  ResponseEntity<Void> rate(@ApiParam(value = "id", required = true) Long productId,
-      @ApiParam(value = "rate", required = true) int rate);
 }

@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "CommentRequestDto")
-public class CommentRequestDto {
+public class ReviewRequestDto {
 
   @ApiModelProperty(value = "The review comment")
-  private String text;
+  private String comment;
 
   @Max(5)
   @Min(1)
