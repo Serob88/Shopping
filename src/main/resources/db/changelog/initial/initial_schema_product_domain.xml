@@ -11,7 +11,7 @@
       <column name="name" type="VARCHAR(256)">
         <constraints nullable="false"/>
       </column>
-      <column name="price" type="DECIMAL(2,2)">
+      <column name="price" type="DECIMAL(10,2)">
         <constraints nullable="false"/>
       </column>
       <column name="category" type="VARCHAR(256)">
