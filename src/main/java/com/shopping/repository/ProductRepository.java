@@ -19,8 +19,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
       + "WHERE r.rate = :rate")
   Page<Product> findByRate(int rate, Pageable pageable);
 
-//  @Query("FROM Product p "
-//      + "WHERE p.price >= :minPrice "
-//      + "and p.price <= : maxPrice")
   Page<Product> findAllByPriceBetween(Double minPrice, Double maxPrice, Pageable pageable);
 }
